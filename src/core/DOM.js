@@ -7,7 +7,6 @@ class DomNode {
 
     // append html layout in string format
     html(htmlString) {
-        console.log('test', htmlString);
         if (typeof htmlString === "string") {
             this.$el.innerHTML = htmlString
             return this
@@ -29,6 +28,12 @@ class DomNode {
         } else {
             this.$el.appendChild(node.$el)
         }
+        return this
+    }
+
+    // adding listenerstf55
+    on(type, cb) {
+        this.$el.addEventListener(type, cb)
         return this
     }
 }
