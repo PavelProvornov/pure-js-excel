@@ -4,17 +4,25 @@ export class Excel {
         this.components = options ? options.components : []
     }
 
-    getRoot() {
-        const $root = document.createElement('div')
-        return $root
+    getLayoutHtml() {
+        const $rootExcelElem = document.createElement('div')
+        $rootExcelElem.classList.add('excel')
+
+        for (let Component of this.components) {
+            // creating root container for componet
+            const $componentContainer = document.createElement('div')
+            $componentContainer.classList.add(Component.className)
+
+            // creating instance of the component and placing it to component root el
+            const component = new Component($componentContainer)
+            $componentContainer.innerHTML = component.toHtml()
+            // then append to excel
+            $rootExcelElem.append($componentContainer)
+        }
+        return $rootExcelElem
     }
 
     render() {
-        console.log(this.components);
-        for (let Component of this.components) {
-            const component = new Component()
-            console.log(component, this, this.$el);
-            this.$el.insertAdjacentHTML('afterbegin', component.toHtml())
-        }
+        this.$el.append(this.getLayoutHtml())
     }
 }
