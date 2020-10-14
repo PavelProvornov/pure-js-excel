@@ -4,7 +4,7 @@ import {
 
 export class Excel {
     constructor(selector, options) {
-        this.$el = $.find(selector)
+        this.$el = $(selector)
         this.components = options ? options.components : []
     }
 
@@ -14,10 +14,9 @@ export class Excel {
         for (let Component of this.components) {
             // creating root container for componet
             const $componentContainer = $.create('div', Component.className)
-
             // creating instance of the component and placing it to component root el
             const component = new Component($componentContainer)
-            $componentContainer.innerHTML = component.toHtml()
+            $componentContainer.html(component.toHtml())
             // then append to excel
             $rootExcelElem.append($componentContainer)
         }
