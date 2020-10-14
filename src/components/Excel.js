@@ -1,17 +1,19 @@
+import {
+    $
+} from "@core/DOM.js"
+
 export class Excel {
     constructor(selector, options) {
-        this.$el = document.querySelector(selector)
+        this.$el = $.find(selector)
         this.components = options ? options.components : []
     }
 
     getLayoutHtml() {
-        const $rootExcelElem = document.createElement('div')
-        $rootExcelElem.classList.add('excel')
+        const $rootExcelElem = $.create('div', 'excel')
 
         for (let Component of this.components) {
             // creating root container for componet
-            const $componentContainer = document.createElement('div')
-            $componentContainer.classList.add(Component.className)
+            const $componentContainer = $.create('div', Component.className)
 
             // creating instance of the component and placing it to component root el
             const component = new Component($componentContainer)
